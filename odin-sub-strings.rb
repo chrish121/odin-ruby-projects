@@ -1,10 +1,14 @@
 def substrings(words, array)
   tally = {}
-  string_array = words.split("")
+  new_array = []
+  string_array = words.downcase.split("")
   flat_array = string_array.flatten
   joined_string = flat_array.join
   print joined_string
-  array.each do |substring|
+  array.each do |substring| 
+    new_array.push(substring.downcase)
+  end
+  new_array.each do |substring|
     if joined_string.include?(substring)
       tally[substring] = 1
     end
