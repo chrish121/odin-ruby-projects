@@ -1,19 +1,26 @@
 def substrings(words, array)
   tally = {}
   new_array = []
-  string_array = words.downcase.split("")
-  flat_array = string_array.flatten
-  joined_string = flat_array.join
-  print joined_string
+  string_array = words.downcase.split(" ")
   array.each do |substring| 
     new_array.push(substring.downcase)
   end
-  new_array.each do |substring|
-    if joined_string.include?(substring)
-      tally[substring] = 1
+
+  string_array.each do |string|
+    new_array.each do |substring|
+      if !tally[substring]
+        tally[substring] = 0
+      else
+        tally[substring]
+      end
+      if string.include?(substring)
+        tally[substring] += 1
+      end
     end
   end
-  print tally
+
+  modified_tally = tally.delete_if {|key, value| value == 0}
+  p modified_tally
 end
 
 dictionary = ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"]
