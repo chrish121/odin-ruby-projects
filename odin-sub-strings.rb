@@ -9,11 +9,7 @@ def substrings(words, array)
 
   new_array.each do |substring|
     original_string = joined_array
-    if !tally[substring]
-      tally[substring] = 0
-    else
-      tally[substring]
-    end
+    tally[substring] = 0
     if joined_array.include?(substring)
       tally[substring] += 1
       joined_array = joined_array.sub("#{substring}", "rep")
