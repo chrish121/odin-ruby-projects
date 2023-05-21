@@ -1,22 +1,30 @@
 def substrings(words, array)
   tally = {}
   new_array = []
-  string_array = words.downcase.split(" ")
-  array.each do |substring| 
+  string_array = words.downcase.split("")
+  joined_array = string_array.join("")
+  array.each do |substring|
     new_array.push(substring.downcase)
   end
 
-  string_array.each do |string|
-    new_array.each do |substring|
-      if !tally[substring]
-        tally[substring] = 0
-      else
-        tally[substring]
-      end
-      if string.include?(substring)
-        tally[substring] += 1
+  new_array.each do |substring|
+    original_string = joined_array
+    if !tally[substring]
+      tally[substring] = 0
+    else
+      tally[substring]
+    end
+    if joined_array.include?(substring)
+      tally[substring] += 1
+      joined_array = joined_array.sub("#{substring}", "rep")
+      if joined_array.include?(substring)
+        while joined_array.include?(substring)
+          tally[substring] += 1
+          joined_array = joined_array.sub("#{substring}", "rep")
+        end
       end
     end
+    joined_array = original_string
   end
 
   modified_tally = tally.delete_if {|key, value| value == 0}
